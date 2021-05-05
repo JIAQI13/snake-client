@@ -1,9 +1,10 @@
 const net = require("net");
 const setupInput = require("./input");
+const { IP, PORT } = require("./constants");
 const connect = function() {
   const conn = net.createConnection({
-    host: '135.23.222.131',
-    port: 50542
+    host: IP,
+    port: PORT
   });
   //setupInput.setupInput;
   conn.on("connect", () => {
@@ -11,7 +12,7 @@ const connect = function() {
       conn.write('Name: BOB');
       process.stdin.on('data',(key) =>{
         //process.stdout.write('.......');
-        setupInput(key);
+        setupInput(key,conn);
         });
   });
   return conn;
